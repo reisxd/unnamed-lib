@@ -1,0 +1,28 @@
+{
+  "name": "unnamed-lib",
+  "version": "1.0.1",
+  "description": "A Discord Bot Lib.",
+  "main": "src/main/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "library"
+  ],
+  "author": "reis",
+  "license": "MIT",
+  "dependencies": {
+    "@discordjs/collection": "^0.1.6",
+    "node-fetch": "^2.6.1",
+    "os": "^0.1.1",
+    "pako": "^2.0.3",
+    "ws": "^7.4.5",
+    "zlib": "^1.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "uwu"
+  }
+}
