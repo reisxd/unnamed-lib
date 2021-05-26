@@ -23,6 +23,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "uwu"
+    "url": "git+https://github.com/reisxd/unnamed-lib.git"
   }
 }
