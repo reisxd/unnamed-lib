@@ -7,7 +7,7 @@ const fetch = require('node-fetch');
  * @param {string} message - The ID of the message.
  */
 async function sendMessage(message, channel) {
-    const embed = message?.toJSON && message?.toJSON instanceof Object ? message?.toJSON : (message && message instanceof Object ? parseEmbedObject(message) : {});
+    const embed = message?.toJSON?.() && message?.toJSON?.() instanceof Object ? message?.toJSON?.() : (message && message instanceof Object ? parseEmbedObject(message) : {});
     let JsonBody = {
         content: `${message}`,
     }
@@ -48,7 +48,7 @@ async function deleteMessage(message, channel) {
  * @param {string} messageId - The ID of the message.
  */
 async function editMessage(message, channel, messageId) {
-    const embed = message?.toJSON && message?.toJSON instanceof Object ? message?.toJSON : (message && message instanceof Object ? parseEmbedObject(message) : {});
+    const embed = message?.toJSON?.() && message?.toJSON?.() instanceof Object ? message?.toJSON?.() : (message && message instanceof Object ? parseEmbedObject(message) : {});
     let JsonBody = {
         content: `${message}`,
     }

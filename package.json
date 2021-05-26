@@ -1,6 +1,6 @@
 {
   "name": "unnamed-lib",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Discord Bot Lib.",
   "main": "src/main/index.js",
   "scripts": {

@@ -155,12 +155,10 @@ class Bot extends EventEmitter {
 }
 for (const file of readdirSync(`${__dirname}/functions/`).filter(f => f.endsWith('.js'))) {
     try {
-      const Function = require(`./functions/${file}`);
+      const fn = require(`./functions/${file}`);
 
-      Object.assign(Bot.prototype, Function);
+      Object.assign(Bot.prototype, fn);
     } catch (err) {
       console.error(`Function ${file.slice(0, -3)} failed to load, error:\n${err}`);
     }
   }
-
-module.exports = Object.assign(Bot);

@@ -2,7 +2,7 @@
 A Discord library written in JavaScript
 
 Example:
-```
+```js
 const Bot = require('unnamed-lib');
 const bot = new Bot({
     token: "Token",
