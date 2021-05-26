@@ -159,6 +159,8 @@ for (const file of readdirSync(`${__dirname}/functions/`).filter(f => f.endsWith
 
       Object.assign(Bot.prototype, fn);
     } catch (err) {
-      console.error(`Function ${file.slice(0, -3)} failed to load, error:\n${err}`);
+      console.error(`Function ${file.slice(0, -3)} failed to load, error:\n${err}\nYou may need to upgrade to Node 14^.`);
     }
   }
+
+module.exports = Bot;
