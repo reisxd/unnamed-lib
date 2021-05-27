@@ -6,7 +6,7 @@ const fetch = require('node-fetch');
  * @param {string} channel - The ID of the channel.
  * @param {string} message - The ID of the message.
  */
-async function sendMessage(message, channel) {
+async function sendMessage(message, channel, interaction) {
     const embed = message?.toJSON?.() && message?.toJSON?.() instanceof Object ? message?.toJSON?.() : (message && message instanceof Object ? parseEmbedObject(message) : {});
     let JsonBody = {
         content: `${message}`,
@@ -14,6 +14,9 @@ async function sendMessage(message, channel) {
     if(embed.type) { 
         JsonBody.content = null;
         JsonBody.embed = embed;
+    }
+    if(interaction[0].type) {
+        JsonBody.components = [{type: 1, components: interaction}]
     }
         if(message.length > 2000) return new Error('The message lenght is bigger than 2000.')
     return fetch(`https://discord.com/api/v8/channels/${channel}/messages`, {
@@ -47,7 +50,7 @@ async function deleteMessage(message, channel) {
  * @param {string} message - The message content(or embed).
  * @param {string} messageId - The ID of the message.
  */
-async function editMessage(message, channel, messageId) {
+async function editMessage(message, channel, interaction, messageId) {
     const embed = message?.toJSON?.() && message?.toJSON?.() instanceof Object ? message?.toJSON?.() : (message && message instanceof Object ? parseEmbedObject(message) : {});
     let JsonBody = {
         content: `${message}`,
@@ -55,6 +58,9 @@ async function editMessage(message, channel, messageId) {
     if(embed.type) { 
         JsonBody.content = null;
         JsonBody.embed = embed;
+    }
+    if(interaction[0].type) {
+        JsonBody.components = [{type: 1, components: interaction}]
     }
     if(message.length > 2000) return new Error('The message lenght is bigger than 2000.')
     fetch(`https://discord.com/api/v8/channels/${channel}/messages/${messageId}`, {
