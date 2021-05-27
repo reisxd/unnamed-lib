@@ -15,7 +15,7 @@ async function sendMessage(message, channel, interaction) {
         JsonBody.content = null;
         JsonBody.embed = embed;
     }
-    if(interaction[0].type) {
+    if(interaction) {
         JsonBody.components = [{type: 1, components: interaction}]
     }
         if(message.length > 2000) return new Error('The message lenght is bigger than 2000.')
@@ -299,6 +299,22 @@ async function unpinMessage(channel, message) {
     })
 };
 
+async function sendInteraction(message, interaction){ 
+    fetch(`https://discord.com/api/v8/interactions/${interaction.id}/${interaction.token}/callback`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            type: 4,
+            data: {
+                content: message
+            }
+        })
+    })
+    
+}
+
 module.exports = {
     sendMessage,
     deleteMessage,
@@ -317,5 +333,6 @@ module.exports = {
     startTyping,
     getPinnedMessages,
     pinMessage,
-    unpinMessage
+    unpinMessage,
+    sendInteraction
 }
