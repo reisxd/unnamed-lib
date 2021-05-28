@@ -209,23 +209,7 @@ async function unbanMember(guild, user) {
         }
     })
 };
-/*
-THIS FUNCTION IS NOT FINISHED. PLEASE DO NOT USE IT.
-async function hasPermission(guild, member) {
-    let Guild;
-    const getFromCache = await this.guilds.get(guild)
-    if(!getFromCache) {
-        Guild = await this.getGuild(guild)
-    } else {
-        Guild = getFromCache;
-    }
-    const Member = await this.getGuildMember(guild, member)
-    const MemberRoles = Member.roles
-    let Roles = Guild.roles
-    let Role = Roles.find(role => role.id === MemberRoles)
-    return console.log(this.getReadablePerms(Role));
-};
-*/
+
 module.exports = {
     addRole,
     removeRole,
@@ -239,5 +223,5 @@ module.exports = {
     getBan,
     banMember,
     unbanMember,
-    //hasPermission
+    
 }
