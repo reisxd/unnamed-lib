@@ -315,6 +315,33 @@ async function sendInteraction(message, interaction){
     
 }
 
+async function replyMessage(message, channel, guildId, messageId, disablePing, interaction) {
+    const embed = message?.toJSON?.() && message?.toJSON?.() instanceof Object ? message?.toJSON?.() : (message && message instanceof Object ? parseEmbedObject(message) : {});
+    let JsonBody = {
+        content: `${message}`,
+        message_reference: { channel_id: channel, guild_id: guildId, message_id: messageId}
+    }
+    if(embed.type) { 
+        JsonBody.content = null;
+        JsonBody.embed = embed;
+    }
+    if(interaction) {
+        JsonBody.components = [{type: 1, components: interaction}]
+    }
+    if(disablePing){
+        JsonBody.allowed_mentions = {parse: ["users", "roles", "everyone"], replied_user: false}
+    }
+        if(message.length > 2000) return new Error('The message lenght is bigger than 2000.')
+    return fetch(`https://discord.com/api/v8/channels/${channel}/messages`, {
+        method: 'POST',
+        body: JSON.stringify(JsonBody),
+        headers: {
+            Authorization: `Bot ${this.opt.token}`,
+            'content-type': 'application/json'
+        }
+    }).then(res => res.json())
+};
+
 module.exports = {
     sendMessage,
     deleteMessage,
@@ -334,5 +361,6 @@ module.exports = {
     getPinnedMessages,
     pinMessage,
     unpinMessage,
-    sendInteraction
+    sendInteraction,
+    replyMessage
 }
